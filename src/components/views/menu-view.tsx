@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoryBar } from "@/components/layout/category-bar";
 import { ProductList } from "@/components/menu/product-list";
 import { getProductsByCategory, TRIO_PROMO_NOTE } from "@/lib/menu";
+import { useNavigation } from "@/lib/navigation-context";
 import type { Category } from "@/types/menu";
 
 export function MenuView() {
-  const [activeCategory, setActiveCategory] = useState<Category>("sanduiches");
+  const { menuCategory } = useNavigation();
+  const [activeCategory, setActiveCategory] = useState<Category>(menuCategory);
   const products = getProductsByCategory(activeCategory);
+
+  useEffect(() => {
+    setActiveCategory(menuCategory);
+  }, [menuCategory]);
 
   return (
     <div className="min-w-0 px-4">

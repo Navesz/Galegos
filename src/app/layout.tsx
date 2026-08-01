@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   description:
     "Cardápio digital da Gallegos — hambúrgueres, bebidas, açaí e mais. Peça pelo WhatsApp.",
   icons: {
-    icon: "/logo/icon.png",
-    apple: "/logo/icon.png",
+    icon: "/logo/icon.svg",
+    apple: "/logo/icon.svg",
   },
   appleWebApp: {
     capable: true,

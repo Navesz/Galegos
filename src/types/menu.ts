@@ -4,6 +4,7 @@ export type Category =
   | "trios"
   | "dogs"
   | "batatas"
+  | "pasteis"
   | "acai"
   | "bebidas"
   | "opcionais";

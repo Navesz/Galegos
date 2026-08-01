@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
@@ -14,12 +13,12 @@ export function Logo({
 }: LogoProps) {
   if (variant === "icon") {
     return (
-      <Image
-        src="/logo/icon.png"
+      <img
+        src="/logo/icon.svg"
         alt="Gallegos"
         width={48}
         height={48}
-        priority={priority}
+        loading={priority ? "eager" : "lazy"}
         className={cn("h-10 w-10 object-contain", className)}
       />
     );
@@ -27,34 +26,34 @@ export function Logo({
 
   if (variant === "horizontal") {
     return (
-      <div className={cn("flex items-center gap-3", className)}>
-        <Image
-          src="/logo/icon.png"
+      <div className={cn("flex items-center gap-2", className)}>
+        <img
+          src="/logo/icon.svg"
           alt=""
           width={44}
           height={44}
           aria-hidden
           className="h-11 w-11 shrink-0 object-contain"
         />
-        <Image
-          src="/logo/logo.png"
+        <img
+          src="/logo/logo-vertical.svg"
           alt="Gallegos Hambúrgueres"
           width={160}
           height={48}
-          priority={priority}
-          className="h-10 w-auto max-w-[140px] object-contain object-left"
+          loading={priority ? "eager" : "lazy"}
+          className="h-10 w-auto max-w-[150px] object-contain object-left"
         />
       </div>
     );
   }
 
   return (
-    <Image
-      src="/logo/logo.png"
+    <img
+      src="/logo/logo-vertical.svg"
       alt="Gallegos Hambúrgueres"
       width={280}
       height={320}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
       className={cn("h-auto w-[220px] max-w-[75vw] object-contain", className)}
     />
   );

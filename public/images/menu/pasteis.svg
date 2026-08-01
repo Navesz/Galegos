@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F9F4E8"/>
+  <rect x="40" y="40" width="320" height="220" rx="16" fill="#F6A01E" opacity="0.15"/>
+  <path fill="#E4511E" d="M120 200c30-40 50-60 80-80 30 20 50 40 80 80H120z"/>
+  <path fill="#F6A01E" d="M140 120h120l-20 80H160l-20-80z"/>
+  <ellipse cx="200" cy="200" rx="90" ry="20" fill="#E4511E" opacity="0.5"/>
+  <text x="200" y="260" text-anchor="middle" fill="#3D2B1F" font-family="Arial, sans-serif" font-size="20" font-weight="700">Pastel</text>
+</svg>

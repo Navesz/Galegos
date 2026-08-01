@@ -8,6 +8,7 @@ const IMG = {
   trio: ITEM_IMAGE,
   dog: ITEM_IMAGE,
   batata: ITEM_IMAGE,
+  pastel: "/images/menu/pasteis.svg",
   acai: ITEM_IMAGE,
   bebida: ITEM_IMAGE,
   opcional: ITEM_IMAGE,
@@ -19,6 +20,7 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "trios", label: "Trios", emoji: "🍟" },
   { id: "dogs", label: "Dogs", emoji: "🌭" },
   { id: "batatas", label: "Batatas", emoji: "🥔" },
+  { id: "pasteis", label: "Pastéis", emoji: "🥟" },
   { id: "acai", label: "Açaí e Sucos", emoji: "🍇" },
   { id: "bebidas", label: "Bebidas", emoji: "🥤" },
 ];
@@ -392,6 +394,88 @@ export const PRODUCTS: Product[] = [
     category: "batatas",
   },
 
+  // Pastéis
+  {
+    id: "pastel-01-carne",
+    name: "Pastel de Carne",
+    description: "Pastel tradicional recheado com carne",
+    price: 10.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-02-frango",
+    name: "Pastel de Frango",
+    description: "Pastel tradicional recheado com frango",
+    price: 10.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-03-queijo",
+    name: "Pastel de Queijo",
+    description: "Pastel tradicional recheado com queijo",
+    price: 10.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-04-frango-catupiry",
+    name: "Pastel de Frango com Catupiry",
+    description: "Recheio de frango com Catupiry",
+    price: 12.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-05-carne-queijo",
+    name: "Pastel de Carne com Queijo",
+    description: "Recheio de carne com queijo",
+    price: 12.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-06-carne-seca-catupiry",
+    name: "Pastel de Carne Seca com Catupiry",
+    description: "Recheio de carne seca com Catupiry",
+    price: 15.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-07-carne-bacon",
+    name: "Pastel de Carne com Bacon",
+    description: "Recheio de carne com bacon",
+    price: 12.5,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-08-costela-queijo",
+    name: "Pastel de Costela no Bafo com Queijo Triturado",
+    description: "Recheio de costela no bafo com queijo triturado",
+    price: 15.5,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-09-banana",
+    name: "Pastel de Banana",
+    description: "Banana, mussarela, canela e açúcar",
+    price: 11.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+  {
+    id: "pastel-10-nutella-queijo",
+    name: "Pastel de Nutella com Queijo",
+    description: "Recheio de Nutella com queijo",
+    price: 15.0,
+    image: IMG.pastel,
+    category: "pasteis",
+  },
+
   // Açaí, cremes e sucos
   {
     id: "acai-morango-500",
@@ -412,7 +496,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "creme-500",
     name: "Creme 500ml",
-    description: "Sabores: banana, cupuaçu, maracujá, morango ou laranja",
+    description:
+      "Sabores: açaí com banana, acerola, goiaba, maracujá, cupuaçu ou morango",
     price: 15.0,
     image: IMG.acai,
     category: "acai",
@@ -420,7 +505,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "suco-500",
     name: "Suco 500ml",
-    description: "Sabores: banana, cupuaçu, maracujá, morango ou laranja",
+    description: "Sabores: acerola, goiaba, maracujá, cupuaçu ou morango",
     price: 10.0,
     image: IMG.acai,
     category: "acai",
