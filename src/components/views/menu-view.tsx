@@ -11,7 +11,7 @@ export function MenuView() {
   const products = getProductsByCategory(activeCategory);
 
   return (
-    <div className="px-4">
+    <div className="min-w-0 px-4">
       <div className="mb-4 pt-2">
         <h1 className="text-xl font-extrabold text-brand-brown">Cardápio</h1>
         <p className="text-sm text-brand-brown/55">
