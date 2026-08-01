@@ -1,43 +1,61 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { LogoIcon } from "./logo-icon";
-import { LogoText } from "./logo-text";
-
-type LogoVariant = "vertical" | "horizontal" | "icon";
 
 type LogoProps = {
-  variant?: LogoVariant;
+  variant?: "vertical" | "horizontal" | "icon";
   className?: string;
-  showSubtitle?: boolean;
+  priority?: boolean;
 };
 
 export function Logo({
-  variant = "horizontal",
+  variant = "vertical",
   className,
-  showSubtitle = true,
+  priority = false,
 }: LogoProps) {
   if (variant === "icon") {
-    return <LogoIcon className={cn("w-10", className)} />;
+    return (
+      <Image
+        src="/logo/icon.png"
+        alt="Gallegos"
+        width={48}
+        height={48}
+        priority={priority}
+        className={cn("h-10 w-10 object-contain", className)}
+      />
+    );
   }
 
-  if (variant === "vertical") {
+  if (variant === "horizontal") {
     return (
-      <div
-        className={cn("flex flex-col items-center gap-3", className)}
-        aria-label="Gallegos Hambúrgueres"
-      >
-        <LogoIcon className="w-24 sm:w-28" />
-        <LogoText showSubtitle={showSubtitle} />
+      <div className={cn("flex items-center gap-3", className)}>
+        <Image
+          src="/logo/icon.png"
+          alt=""
+          width={44}
+          height={44}
+          aria-hidden
+          className="h-11 w-11 shrink-0 object-contain"
+        />
+        <Image
+          src="/logo/logo.png"
+          alt="Gallegos Hambúrgueres"
+          width={160}
+          height={48}
+          priority={priority}
+          className="h-10 w-auto max-w-[140px] object-contain object-left"
+        />
       </div>
     );
   }
 
   return (
-    <div
-      className={cn("flex items-center gap-3", className)}
-      aria-label="Gallegos Hambúrgueres"
-    >
-      <LogoIcon className="w-12 shrink-0 sm:w-14" />
-      <LogoText showSubtitle={showSubtitle} compact />
-    </div>
+    <Image
+      src="/logo/logo.png"
+      alt="Gallegos Hambúrgueres"
+      width={280}
+      height={320}
+      priority={priority}
+      className={cn("h-auto w-[220px] max-w-[75vw] object-contain", className)}
+    />
   );
 }

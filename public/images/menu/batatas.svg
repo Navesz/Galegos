@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F9F4E8"/>
+  <rect x="40" y="40" width="320" height="220" rx="16" fill="#F6A01E" opacity="0.15"/>
+  <rect x="120" y="100" width="160" height="100" rx="12" fill="#E4511E" opacity="0.8"/>
+  <rect x="130" y="110" width="140" height="70" rx="8" fill="#F6A01E"/>
+  <rect x="140" y="150" width="50" height="8" rx="2" fill="#3D2B1F" opacity="0.5"/>
+  <text x="200" y="260" text-anchor="middle" fill="#3D2B1F" font-family="Arial, sans-serif" font-size="20" font-weight="700">Batata</text>
+</svg>

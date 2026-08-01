@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F9F4E8"/>
+  <rect x="40" y="40" width="320" height="220" rx="16" fill="#E4511E" opacity="0.15"/>
+  <path fill="#E4511E" d="M140 200c0-50 25-80 60-90 35 10 60 40 60 90H140z"/>
+  <rect x="175" y="110" width="50" height="70" rx="8" fill="#F6A01E"/>
+  <text x="200" y="260" text-anchor="middle" fill="#3D2B1F" font-family="Arial, sans-serif" font-size="20" font-weight="700">Dog</text>
+</svg>

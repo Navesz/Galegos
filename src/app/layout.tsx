@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
-import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -13,10 +12,24 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Gallegos | Cardápio Digital",
   description:
-    "Cardápio digital da Gallegos — hambúrgueres, bebidas, açaí e sorvete. Peça pelo WhatsApp.",
+    "Cardápio digital da Gallegos — hambúrgueres, bebidas, açaí e mais. Peça pelo WhatsApp.",
   icons: {
-    icon: "/logo/icon.svg",
+    icon: "/logo/icon.png",
+    apple: "/logo/icon.png",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Gallegos",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#F9F4E8",
 };
 
 export default function RootLayout({
@@ -26,11 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${dmSans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-brand-cream font-sans text-brand-brown">
-        <Providers>
-          <Header />
-          <main className="flex-1">{children}</main>
-        </Providers>
+      <body className="min-h-dvh bg-brand-cream font-sans text-brand-brown">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

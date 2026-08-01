@@ -9,14 +9,25 @@ import {
   type ReactNode,
 } from "react";
 import type { CartItem, Product } from "@/types/menu";
+import { getCartLineTotal, isOpcional } from "@/lib/menu";
+
+function createCartId() {
+  return crypto.randomUUID();
+}
 
 type CartContextValue = {
   items: CartItem[];
   totalItems: number;
   totalPrice: number;
   addItem: (product: Product) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  decrementProduct: (productId: string) => void;
+  updateLineQuantity: (cartId: string, quantity: number) => void;
+  updateExtraQuantity: (
+    cartId: string,
+    extraProduct: Product,
+    quantity: number,
+  ) => void;
+  getQuantity: (productId: string) => number;
   clearCart: () => void;
 };
 
@@ -26,45 +37,120 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
   const addItem = useCallback((product: Product) => {
-    setItems((current) => {
-      const existing = current.find((item) => item.product.id === product.id);
+    if (isOpcional(product)) return;
 
-      if (existing) {
+    setItems((current) => {
+      const mergeTarget = current.find(
+        (item) =>
+          item.product.id === product.id && item.extras.length === 0,
+      );
+
+      if (mergeTarget) {
         return current.map((item) =>
-          item.product.id === product.id
+          item.cartId === mergeTarget.cartId
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
 
-      return [...current, { product, quantity: 1 }];
+      return [
+        ...current,
+        {
+          cartId: createCartId(),
+          product,
+          quantity: 1,
+          extras: [],
+        },
+      ];
     });
   }, []);
 
-  const removeItem = useCallback((productId: string) => {
-    setItems((current) =>
-      current.filter((item) => item.product.id !== productId),
-    );
+  const decrementProduct = useCallback((productId: string) => {
+    setItems((current) => {
+      const candidates = current.filter((item) => item.product.id === productId);
+      if (candidates.length === 0) return current;
+
+      const target =
+        [...candidates].reverse().find((item) => item.extras.length === 0) ??
+        candidates[candidates.length - 1];
+
+      if (target.quantity <= 1) {
+        return current.filter((item) => item.cartId !== target.cartId);
+      }
+
+      return current.map((item) =>
+        item.cartId === target.cartId
+          ? { ...item, quantity: item.quantity - 1 }
+          : item,
+      );
+    });
   }, []);
 
-  const updateQuantity = useCallback((productId: string, quantity: number) => {
+  const updateLineQuantity = useCallback((cartId: string, quantity: number) => {
     if (quantity <= 0) {
-      setItems((current) =>
-        current.filter((item) => item.product.id !== productId),
-      );
+      setItems((current) => current.filter((item) => item.cartId !== cartId));
       return;
     }
 
     setItems((current) =>
       current.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item,
+        item.cartId === cartId ? { ...item, quantity } : item,
       ),
     );
   }, []);
 
+  const updateExtraQuantity = useCallback(
+    (cartId: string, extraProduct: Product, quantity: number) => {
+      setItems((current) =>
+        current.map((item) => {
+          if (item.cartId !== cartId) return item;
+
+          if (quantity <= 0) {
+            return {
+              ...item,
+              extras: item.extras.filter(
+                (extra) => extra.product.id !== extraProduct.id,
+              ),
+            };
+          }
+
+          const existing = item.extras.find(
+            (extra) => extra.product.id === extraProduct.id,
+          );
+
+          if (existing) {
+            return {
+              ...item,
+              extras: item.extras.map((extra) =>
+                extra.product.id === extraProduct.id
+                  ? { ...extra, quantity }
+                  : extra,
+              ),
+            };
+          }
+
+          return {
+            ...item,
+            extras: [...item.extras, { product: extraProduct, quantity }],
+          };
+        }),
+      );
+    },
+    [],
+  );
+
   const clearCart = useCallback(() => {
     setItems([]);
   }, []);
+
+  const getQuantity = useCallback(
+    (productId: string) => {
+      return items
+        .filter((item) => item.product.id === productId)
+        .reduce((sum, item) => sum + item.quantity, 0);
+    },
+    [items],
+  );
 
   const totalItems = useMemo(
     () => items.reduce((sum, item) => sum + item.quantity, 0),
@@ -72,11 +158,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 
   const totalPrice = useMemo(
-    () =>
-      items.reduce(
-        (sum, item) => sum + item.product.price * item.quantity,
-        0,
-      ),
+    () => items.reduce((sum, item) => sum + getCartLineTotal(item), 0),
     [items],
   );
 
@@ -86,8 +168,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       totalItems,
       totalPrice,
       addItem,
-      removeItem,
-      updateQuantity,
+      decrementProduct,
+      updateLineQuantity,
+      updateExtraQuantity,
+      getQuantity,
       clearCart,
     }),
     [
@@ -95,8 +179,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       totalItems,
       totalPrice,
       addItem,
-      removeItem,
-      updateQuantity,
+      decrementProduct,
+      updateLineQuantity,
+      updateExtraQuantity,
+      getQuantity,
       clearCart,
     ],
   );

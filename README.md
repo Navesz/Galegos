@@ -26,7 +26,7 @@ Os produtos ficam em [`src/lib/menu.ts`](src/lib/menu.ts). Cada item tem:
 - `description` — descrição opcional
 - `price` — preço em reais (ex: `32.90`)
 - `image` — caminho da foto em `public/images/menu/`
-- `category` — `hamburgueres`, `bebidas`, `acai` ou `sorvete`
+- `category` — `sanduiches`, `picanha`, `trios`, `dogs`, `batatas`, `acai`, `bebidas` ou `opcionais`
 
 Para trocar fotos, coloque as imagens em `public/images/menu/` e atualize o campo `image` de cada produto.
 

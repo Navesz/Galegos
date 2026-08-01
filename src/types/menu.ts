@@ -1,4 +1,12 @@
-export type Category = "hamburgueres" | "bebidas" | "acai" | "sorvete";
+export type Category =
+  | "sanduiches"
+  | "picanha"
+  | "trios"
+  | "dogs"
+  | "batatas"
+  | "acai"
+  | "bebidas"
+  | "opcionais";
 
 export type Product = {
   id: string;
@@ -9,9 +17,16 @@ export type Product = {
   category: Category;
 };
 
-export type CartItem = {
+export type CartExtra = {
   product: Product;
   quantity: number;
+};
+
+export type CartItem = {
+  cartId: string;
+  product: Product;
+  quantity: number;
+  extras: CartExtra[];
 };
 
 export type CategoryInfo = {

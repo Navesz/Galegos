@@ -1,145 +1,531 @@
-import type { CategoryInfo, Product } from "@/types/menu";
+import type { CategoryInfo, Product, CartItem } from "@/types/menu";
+
+const IMG = {
+  sanduiche: "/images/menu/hamburgueres.svg",
+  picanha: "/images/menu/hamburgueres.svg",
+  trio: "/images/menu/trios.svg",
+  dog: "/images/menu/dogs.svg",
+  batata: "/images/menu/batatas.svg",
+  acai: "/images/menu/acai.svg",
+  bebida: "/images/menu/bebidas.svg",
+  opcional: "/images/menu/opcionais.svg",
+} as const;
 
 export const CATEGORIES: CategoryInfo[] = [
-  { id: "hamburgueres", label: "Hambúrgueres", emoji: "🍔" },
+  { id: "sanduiches", label: "Sanduíches", emoji: "🍔" },
+  { id: "picanha", label: "Linha Picanha", emoji: "🔥" },
+  { id: "trios", label: "Trios", emoji: "🍟" },
+  { id: "dogs", label: "Dogs", emoji: "🌭" },
+  { id: "batatas", label: "Batatas", emoji: "🥔" },
+  { id: "acai", label: "Açaí e Sucos", emoji: "🫐" },
   { id: "bebidas", label: "Bebidas", emoji: "🥤" },
-  { id: "acai", label: "Açaí", emoji: "🫐" },
-  { id: "sorvete", label: "Sorvete", emoji: "🍦" },
 ];
 
 export const PRODUCTS: Product[] = [
+  // Sanduíches — servidos individualmente
   {
-    id: "x-classico",
-    name: "X-Clássico",
-    description: "Pão, hambúrguer 150g, queijo, alface e tomate",
-    price: 28.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "01-x-burguer",
+    name: "X Burguer",
+    description: "Pão, hambúrguer e queijo",
+    price: 13.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "x-bacon",
-    name: "X-Bacon",
-    description: "Hambúrguer 150g, bacon crocante, queijo e molho especial",
-    price: 32.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "02-hamburguer",
+    name: "Hambúrguer",
+    description: "Pão, hambúrguer, alface e tomate",
+    price: 13.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "x-tudo",
-    name: "X-Tudo",
-    description: "Hambúrguer 180g, bacon, ovo, queijo, presunto e salada",
-    price: 36.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "03-x-salada-especial",
+    name: "X Salada Especial",
+    description: "Pão, hambúrguer, ovo, queijo, alface e tomate",
+    price: 17.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "x-salada",
-    name: "X-Salada",
-    description: "Hambúrguer 150g, queijo, alface, tomate e maionese",
-    price: 27.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "04-x-bacon",
+    name: "X Bacon",
+    description: "Pão, hambúrguer, queijo e bacon",
+    price: 18.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "x-frango",
-    name: "X-Frango",
-    description: "Filé de frango grelhado, queijo, alface e molho da casa",
-    price: 29.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "05-x-bacon-salada",
+    name: "X Bacon Salada",
+    description: "Pão, hambúrguer, bacon, queijo, alface e tomate",
+    price: 19.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "duplo-bacon",
-    name: "Duplo Bacon",
-    description: "Dois hambúrgueres 120g, bacon, cheddar e cebola caramelizada",
-    price: 38.9,
-    image: "/images/menu/hamburgueres.svg",
-    category: "hamburgueres",
+    id: "06-x-tudo",
+    name: "X Tudo",
+    description:
+      "Pão, hambúrguer, ovo, bacon, queijo, salsicha, milho, presunto, alface e tomate",
+    price: 21.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "coca-350",
-    name: "Coca-Cola 350ml",
-    description: "Lata gelada",
-    price: 6.0,
-    image: "/images/menu/bebidas.svg",
-    category: "bebidas",
+    id: "07-x-file-salada",
+    name: "X Filé Salada",
+    description: "Pão, filé mignon, queijo, alface e tomate",
+    price: 20.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "guarana-350",
-    name: "Guaraná 350ml",
-    description: "Lata gelada",
-    price: 5.5,
-    image: "/images/menu/bebidas.svg",
-    category: "bebidas",
+    id: "08-x-frango-salada",
+    name: "X Frango Salada",
+    description: "Pão, filé de frango, queijo, alface e tomate",
+    price: 19.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "suco-laranja",
-    name: "Suco de Laranja 500ml",
-    description: "Natural da casa",
-    price: 10.0,
-    image: "/images/menu/bebidas.svg",
-    category: "bebidas",
+    id: "09-x-file-bacon-salada",
+    name: "X Filé Bacon Salada",
+    description: "Pão, filé mignon, queijo, bacon, alface e tomate",
+    price: 21.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "agua-mineral",
-    name: "Água Mineral 500ml",
-    description: "Com ou sem gás",
-    price: 4.0,
-    image: "/images/menu/bebidas.svg",
-    category: "bebidas",
+    id: "10-x-frango-bacon-salada",
+    name: "X Frango Bacon Salada",
+    description: "Pão, filé de frango, queijo, bacon, alface e tomate",
+    price: 20.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
   },
   {
-    id: "acai-300",
-    name: "Açaí 300ml",
-    description: "Açaí puro com granola",
-    price: 14.0,
-    image: "/images/menu/acai.svg",
+    id: "11-x-file-especial",
+    name: "X Filé Especial",
+    description: "Pão, filé mignon, bacon, queijo, ovo, alface e tomate",
+    price: 22.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+  {
+    id: "12-x-frango-especial",
+    name: "X Frango Especial",
+    description: "Pão, filé de frango, bacon, queijo, ovo, alface e tomate",
+    price: 21.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+  {
+    id: "13-x-salada",
+    name: "X Salada",
+    description: "Pão, hambúrguer, queijo, alface e tomate",
+    price: 15.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+  {
+    id: "14-gostoso-pakas",
+    name: "Gostoso Pakas",
+    description: "Pão, hambúrguer, ovo, queijo, presunto, alface e tomate",
+    price: 16.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+  {
+    id: "15-brutos",
+    name: "Brutos",
+    description:
+      "Pão, 2 hambúrgueres, ovo, salsicha, milho, bacon, queijo, presunto, alface e tomate",
+    price: 24.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+  {
+    id: "16-bomba",
+    name: "Bomba",
+    description:
+      "Pão, hambúrguer, ovo, salsicha, queijo, presunto, alface e tomate",
+    price: 16.99,
+    image: IMG.sanduiche,
+    category: "sanduiches",
+  },
+
+  // Linha Picanha — individual
+  {
+    id: "17-x-picanha-tradicional",
+    name: "X Picanha Tradicional",
+    description: "Hambúrguer sabor picanha, queijo, ovo e salada",
+    price: 16.99,
+    image: IMG.picanha,
+    category: "picanha",
+  },
+  {
+    id: "18-x-picanha-cheddar-bacon",
+    name: "X Picanha Cheddar Bacon",
+    description: "Hambúrguer sabor picanha, queijo, cheddar e bacon",
+    price: 16.99,
+    image: IMG.picanha,
+    category: "picanha",
+  },
+  {
+    id: "19-x-picanha-acebolado",
+    name: "X Picanha Acebolado",
+    description: "Hambúrguer sabor picanha, queijo, ovo e cebola",
+    price: 16.99,
+    image: IMG.picanha,
+    category: "picanha",
+  },
+
+  // Trios Gourmet
+  {
+    id: "trio-01-x-burguer",
+    name: "Trio X Burguer",
+    description: "Pão, hambúrguer e queijo + batata e bebida",
+    price: 23.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-02-hamburguer",
+    name: "Trio Hambúrguer",
+    description: "Pão, hambúrguer, alface e tomate + batata e bebida",
+    price: 24.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-03-x-salada-especial",
+    name: "Trio X Salada Especial",
+    description:
+      "Pão, hambúrguer, ovo, queijo, alface e tomate + batata e bebida",
+    price: 25.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-04-x-bacon",
+    name: "Trio X Bacon",
+    description: "Pão, hambúrguer, queijo e bacon + batata e bebida",
+    price: 27.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-05-x-bacon-salada",
+    name: "Trio X Bacon Salada",
+    description:
+      "Pão, hambúrguer, bacon, queijo, alface e tomate + batata e bebida",
+    price: 28.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-06-x-tudo",
+    name: "Trio X Tudo",
+    description:
+      "Pão, hambúrguer, ovo, queijo, bacon, salsicha, milho, presunto, alface e tomate + batata e bebida",
+    price: 29.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+
+  // Trios Filé e Frango
+  {
+    id: "trio-07-x-file-salada",
+    name: "Trio X Filé Salada",
+    description: "Pão, filé mignon, queijo, alface e tomate + batata e bebida",
+    price: 30.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-08-x-frango-salada",
+    name: "Trio X Frango Salada",
+    description:
+      "Pão, filé de frango, queijo, alface e tomate + batata e bebida",
+    price: 28.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-09-x-file-bacon-salada",
+    name: "Trio X Filé Bacon Salada",
+    description:
+      "Pão, filé mignon, queijo, bacon, alface e tomate + batata e bebida",
+    price: 31.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-10-x-frango-bacon-salada",
+    name: "Trio X Frango Bacon Salada",
+    description:
+      "Pão, filé de frango, queijo, bacon, alface e tomate + batata e bebida",
+    price: 29.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-11-x-file-especial",
+    name: "Trio X Filé Especial",
+    description:
+      "Pão, filé mignon, bacon, queijo, ovo, alface e tomate + batata e bebida",
+    price: 35.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-12-x-frango-especial",
+    name: "Trio X Frango Especial",
+    description:
+      "Pão, filé de frango, bacon, queijo, ovo, alface e tomate + batata e bebida",
+    price: 33.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+
+  // Trios Clássicos
+  {
+    id: "trio-14-gostoso-pakas",
+    name: "Trio Gostoso Pakas",
+    description:
+      "Pão, hambúrguer gourmet, ovo, salsicha, queijo, presunto, alface e tomate + batata e bebida",
+    price: 23.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-15-brutos",
+    name: "Trio Brutos",
+    description:
+      "Pão, 2 hambúrgueres, ovo, salsicha, milho, bacon, queijo, presunto, alface e tomate + batata e bebida",
+    price: 32.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-16-bomba",
+    name: "Trio Bomba",
+    description:
+      "Pão, hambúrguer, ovo, queijo, presunto, salsicha, alface e tomate + batata e bebida",
+    price: 21.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+
+  // Trios Linha Picanha
+  {
+    id: "trio-17-x-picanha-tradicional",
+    name: "Trio X Picanha Tradicional",
+    description:
+      "Hambúrguer sabor picanha, queijo, ovo e salada + batata e bebida",
+    price: 21.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-18-x-picanha-cheddar-bacon",
+    name: "Trio X Picanha Cheddar Bacon",
+    description:
+      "Hambúrguer sabor picanha, queijo, cheddar e bacon + batata e bebida",
+    price: 21.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+  {
+    id: "trio-19-x-picanha-acebolado",
+    name: "Trio X Picanha Acebolado",
+    description:
+      "Hambúrguer sabor picanha, queijo, ovo e cebola + batata e bebida",
+    price: 21.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+
+  // Trio Dog
+  {
+    id: "trio-dog",
+    name: "Trio Dog",
+    description: "Dog na chapa com batata e bebida",
+    price: 16.99,
+    image: IMG.trio,
+    category: "trios",
+  },
+
+  // Dogs
+  {
+    id: "dog-na-chapa",
+    name: "Dog na Chapa",
+    description: "Pão, salsicha, queijo, milho e batata palha",
+    price: 11.99,
+    image: IMG.dog,
+    category: "dogs",
+  },
+
+  // Batatas
+  {
+    id: "batata-pequena",
+    name: "Batata Pequena",
+    price: 7.99,
+    image: IMG.batata,
+    category: "batatas",
+  },
+  {
+    id: "batata-grande",
+    name: "Batata Grande",
+    price: 14.99,
+    image: IMG.batata,
+    category: "batatas",
+  },
+  {
+    id: "batata-cheddar-bacon",
+    name: "Batata com Cheddar e Bacon",
+    price: 25.0,
+    image: IMG.batata,
+    category: "batatas",
+  },
+
+  // Açaí, cremes e sucos
+  {
+    id: "acai-morango-500",
+    name: "Açaí Morango 500ml",
+    description: "Granola, leite ninho, leite condensado e morango",
+    price: 20.0,
+    image: IMG.acai,
     category: "acai",
   },
   {
-    id: "acai-500",
-    name: "Açaí 500ml",
-    description: "Açaí puro com granola e banana",
+    id: "acai-banana-500",
+    name: "Açaí Banana 500ml",
+    description: "Granola, leite ninho, leite condensado e banana",
     price: 18.0,
-    image: "/images/menu/acai.svg",
+    image: IMG.acai,
     category: "acai",
   },
   {
-    id: "acai-700",
-    name: "Açaí 700ml",
-    description: "Açaí com granola, banana, leite em pó e mel",
-    price: 24.0,
-    image: "/images/menu/acai.svg",
+    id: "creme-500",
+    name: "Creme 500ml",
+    description: "Sabores: banana, cupuaçu, maracujá, morango ou laranja",
+    price: 15.0,
+    image: IMG.acai,
     category: "acai",
   },
   {
-    id: "sorvete-casquinha",
-    name: "Casquinha",
-    description: "1 bola — creme, chocolate ou morango",
+    id: "suco-500",
+    name: "Suco 500ml",
+    description: "Sabores: banana, cupuaçu, maracujá, morango ou laranja",
+    price: 10.0,
+    image: IMG.acai,
+    category: "acai",
+  },
+
+  // Bebidas
+  {
+    id: "refri-lata",
+    name: "Refrigerante Lata 310ml",
+    price: 6.0,
+    image: IMG.bebida,
+    category: "bebidas",
+  },
+  {
+    id: "refri-500",
+    name: "Refrigerante 500/600ml",
     price: 8.0,
-    image: "/images/menu/sorvete.svg",
-    category: "sorvete",
+    image: IMG.bebida,
+    category: "bebidas",
+  },
+
+  // Opcionais
+  {
+    id: "opc-bacon",
+    name: "Bacon",
+    price: 4.0,
+    image: IMG.opcional,
+    category: "opcionais",
   },
   {
-    id: "sorvete-taca",
-    name: "Taça 2 Bolas",
-    description: "Escolha dois sabores",
-    price: 14.0,
-    image: "/images/menu/sorvete.svg",
-    category: "sorvete",
+    id: "opc-file-bovino",
+    name: "Filé Bovino",
+    price: 6.99,
+    image: IMG.opcional,
+    category: "opcionais",
   },
   {
-    id: "sorvete-milkshake",
-    name: "Milkshake 400ml",
-    description: "Chocolate, morango ou ovomaltine",
-    price: 16.0,
-    image: "/images/menu/sorvete.svg",
-    category: "sorvete",
+    id: "opc-file-frango",
+    name: "Filé Frango",
+    price: 4.99,
+    image: IMG.opcional,
+    category: "opcionais",
+  },
+  {
+    id: "opc-hamburguer",
+    name: "Hambúrguer",
+    price: 4.0,
+    image: IMG.opcional,
+    category: "opcionais",
+  },
+  {
+    id: "opc-ovo",
+    name: "Ovo",
+    price: 2.0,
+    image: IMG.opcional,
+    category: "opcionais",
+  },
+  {
+    id: "opc-milho",
+    name: "Milho",
+    price: 1.0,
+    image: IMG.opcional,
+    category: "opcionais",
+  },
+  {
+    id: "opc-salada",
+    name: "Salada",
+    price: 1.0,
+    image: IMG.opcional,
+    category: "opcionais",
+  },
+  {
+    id: "opc-salsicha",
+    name: "Salsicha",
+    price: 2.0,
+    image: IMG.opcional,
+    category: "opcionais",
   },
 ];
 
+export const TRIO_PROMO_NOTE =
+  "Nos trios: + R$ 4,00 para trocar o refri por Coca lata.";
+
 export function getProductsByCategory(category: Product["category"]) {
   return PRODUCTS.filter((product) => product.category === category);
+}
+
+export function getOpcionais() {
+  return PRODUCTS.filter((product) => product.category === "opcionais");
+}
+
+export function isOpcional(product: Product) {
+  return product.category === "opcionais";
+}
+
+export function supportsExtras(product: Product) {
+  return ["sanduiches", "picanha", "trios", "dogs"].includes(product.category);
+}
+
+export function getCartLineTotal(item: CartItem) {
+  const base = item.product.price * item.quantity;
+  const extrasTotal = item.extras.reduce(
+    (sum, extra) =>
+      sum + extra.product.price * extra.quantity * item.quantity,
+    0,
+  );
+  return base + extrasTotal;
 }
 
 export function formatPrice(price: number) {
