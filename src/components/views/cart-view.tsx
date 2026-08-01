@@ -88,7 +88,9 @@ export function CartView() {
 
         {!isComplete && (
           <p className="mb-3 text-center text-xs text-brand-brown/50">
-            Preencha nome, endereço completo e pagamento para finalizar
+            {customer.orderType === "pickup"
+              ? "Preencha seu nome para finalizar"
+              : "Preencha nome, endereço completo e pagamento para finalizar"}
           </p>
         )}
 

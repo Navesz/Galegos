@@ -17,7 +17,7 @@ export function ProductRow({ product }: ProductRowProps) {
   const quantity = getQuantity(product.id);
 
   return (
-    <article className="flex gap-3 border-b border-brand-brown/8 bg-white px-4 py-4 last:border-b-0">
+    <article className="flex items-start gap-3 border-b border-brand-brown/8 bg-white px-4 py-4 last:border-b-0">
       <div className="relative size-[72px] shrink-0 overflow-hidden rounded-2xl bg-brand-cream">
         <Image
           src={product.image}
@@ -34,7 +34,7 @@ export function ProductRow({ product }: ProductRowProps) {
             {product.name}
           </h3>
           {product.description && (
-            <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-brand-brown/55">
+            <p className="mt-0.5 text-xs leading-relaxed text-pretty text-brand-brown/55">
               {product.description}
             </p>
           )}
@@ -44,7 +44,7 @@ export function ProductRow({ product }: ProductRowProps) {
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center self-center">
+      <div className="flex shrink-0 items-center self-start pt-1">
         {quantity === 0 ? (
           <Button
             size="icon"

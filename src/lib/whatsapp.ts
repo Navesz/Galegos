@@ -1,10 +1,17 @@
 import type { CartItem } from "@/types/menu";
 import type { CustomerInfo } from "@/types/customer";
-import { PAYMENT_OPTIONS } from "@/types/customer";
+import { ORDER_TYPE_OPTIONS, PAYMENT_OPTIONS } from "@/types/customer";
 import { formatFullAddress } from "@/lib/customer-storage";
 import { formatPrice, getCartLineTotal } from "./menu";
 
 const WHATSAPP_NUMBER = "5524999914039";
+
+function getOrderTypeLabel(orderType: CustomerInfo["orderType"]) {
+  return (
+    ORDER_TYPE_OPTIONS.find((option) => option.id === orderType)?.label ??
+    orderType
+  );
+}
 
 function getPaymentLabel(method: CustomerInfo["paymentMethod"]) {
   return PAYMENT_OPTIONS.find((option) => option.id === method)?.label ?? method;
@@ -25,6 +32,24 @@ export function buildWhatsAppUrl(items: CartItem[], customer: CustomerInfo) {
 
   const total = items.reduce((sum, item) => sum + getCartLineTotal(item), 0);
 
+  const deliveryLines =
+    customer.orderType === "delivery"
+      ? [
+          `Endereço:`,
+          formatFullAddress(customer),
+        ]
+      : [];
+
+  const notesLine =
+    customer.notes.trim().length > 0
+      ? [`Observações: ${customer.notes.trim()}`]
+      : [];
+
+  const paymentLine =
+    customer.orderType === "delivery" && customer.paymentMethod
+      ? [`Pagamento: ${getPaymentLabel(customer.paymentMethod)}`]
+      : [];
+
   const message = [
     "Olá! Gostaria de fazer um pedido:",
     "",
@@ -33,11 +58,12 @@ export function buildWhatsAppUrl(items: CartItem[], customer: CustomerInfo) {
     "",
     `*Total: ${formatPrice(total)}*`,
     "",
-    "*Dados para entrega:*",
+    `*${customer.orderType === "pickup" ? "Dados para retirada" : "Dados para entrega"}:*`,
+    `Tipo: ${getOrderTypeLabel(customer.orderType)}`,
     `Nome: ${customer.name.trim()}`,
-    `Endereço:`,
-    formatFullAddress(customer),
-    `Pagamento: ${getPaymentLabel(customer.paymentMethod)}`,
+    ...deliveryLines,
+    ...paymentLine,
+    ...notesLine,
     "",
     "Pedido feito pelo cardápio Galegos.",
   ].join("\n");

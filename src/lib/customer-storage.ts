@@ -3,7 +3,7 @@ import { EMPTY_CUSTOMER } from "@/types/customer";
 import { onlyDigits } from "@/lib/viacep";
 
 const STORAGE_KEY = "galegos_customer";
-const STORAGE_VERSION = 2;
+const STORAGE_VERSION = 3;
 
 type StoredCustomer = CustomerInfo & { _version?: number; address?: string };
 
@@ -43,7 +43,16 @@ export function loadCustomer(): CustomerInfo {
       return {
         ...EMPTY_CUSTOMER,
         name: parsed.name ?? "",
+        cep: parsed.cep ?? "",
+        street: parsed.street ?? "",
+        number: parsed.number ?? "",
+        complement: parsed.complement ?? "",
+        neighborhood: parsed.neighborhood ?? "",
+        city: parsed.city ?? "",
+        state: parsed.state ?? "",
         paymentMethod: parsed.paymentMethod ?? "",
+        notes: parsed.notes ?? "",
+        orderType: parsed.orderType ?? "delivery",
       };
     }
 
@@ -62,14 +71,21 @@ export function saveCustomer(customer: CustomerInfo) {
 }
 
 export function isCustomerComplete(customer: CustomerInfo) {
+  const hasName = customer.name.trim().length > 0;
+  const hasPayment = customer.paymentMethod !== "";
+
+  if (customer.orderType === "pickup") {
+    return hasName;
+  }
+
   return (
-    customer.name.trim().length > 0 &&
+    hasName &&
     onlyDigits(customer.cep).length === 8 &&
     customer.street.trim().length > 0 &&
     customer.number.trim().length > 0 &&
     customer.neighborhood.trim().length > 0 &&
     customer.city.trim().length > 0 &&
     customer.state.trim().length === 2 &&
-    customer.paymentMethod !== ""
+    hasPayment
   );
 }
