@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" fill="none" role="img" aria-label="Gallegos Hambúrgueres">
+  <g transform="translate(0,-5) scale(0.85)">
+    <path fill="#E4511E" d="M50 4c-2 18-18 24-18 46 0 16 8 28 18 34 10-6 18-18 18-34 0-22-16-28-18-46z"/>
+    <path fill="#E4511E" d="M32 38c-6 8-10 18-10 28 0 14 8 24 18 28V38H32zm36 0v56c10-4 18-14 18-28 0-10-4-20-10-28H68z"/>
+    <ellipse cx="50" cy="52" rx="22" ry="8" fill="#E4511E"/>
+    <circle cx="42" cy="50" r="1.8" fill="#FFFFFF"/>
+    <circle cx="50" cy="48" r="1.8" fill="#FFFFFF"/>
+    <circle cx="58" cy="50" r="1.8" fill="#FFFFFF"/>
+    <path fill="#F6A01E" d="M30 58h40l-6 6H36l-6-6z"/>
+    <rect x="28" y="64" width="44" height="10" rx="3" fill="#3D2B1F"/>
+    <path stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M32 76c6 4 12 4 18 0s12-4 18 0"/>
+    <ellipse cx="50" cy="84" rx="24" ry="9" fill="#E4511E"/>
+  </g>
+  <text x="130" y="58" fill="#3D2B1F" font-family="Impact, Arial Black, sans-serif" font-size="38" font-weight="900" letter-spacing="2">GALLEGOS</text>
+  <text x="130" y="82" fill="#E4511E" font-family="Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="3">HAMBÚRGUERES</text>
+</svg>
