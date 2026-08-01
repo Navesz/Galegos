@@ -1,14 +1,16 @@
 import type { CategoryInfo, Product, CartItem } from "@/types/menu";
 
+const ITEM_IMAGE = "/images/menu/hamburguer.png";
+
 const IMG = {
-  sanduiche: "/images/menu/hamburgueres.svg",
-  picanha: "/images/menu/hamburgueres.svg",
-  trio: "/images/menu/trios.svg",
-  dog: "/images/menu/dogs.svg",
-  batata: "/images/menu/batatas.svg",
-  acai: "/images/menu/acai.svg",
-  bebida: "/images/menu/bebidas.svg",
-  opcional: "/images/menu/opcionais.svg",
+  sanduiche: ITEM_IMAGE,
+  picanha: ITEM_IMAGE,
+  trio: ITEM_IMAGE,
+  dog: ITEM_IMAGE,
+  batata: ITEM_IMAGE,
+  acai: ITEM_IMAGE,
+  bebida: ITEM_IMAGE,
+  opcional: ITEM_IMAGE,
 } as const;
 
 export const CATEGORIES: CategoryInfo[] = [
@@ -17,7 +19,7 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "trios", label: "Trios", emoji: "🍟" },
   { id: "dogs", label: "Dogs", emoji: "🌭" },
   { id: "batatas", label: "Batatas", emoji: "🥔" },
-  { id: "acai", label: "Açaí e Sucos", emoji: "🫐" },
+  { id: "acai", label: "Açaí e Sucos", emoji: "🍇" },
   { id: "bebidas", label: "Bebidas", emoji: "🥤" },
 ];
 

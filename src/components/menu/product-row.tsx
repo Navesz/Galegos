@@ -23,7 +23,7 @@ export function ProductRow({ product }: ProductRowProps) {
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-contain p-1"
           sizes="72px"
         />
       </div>
